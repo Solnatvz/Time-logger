@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Time Logger</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #58a6ff;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            color: #8b949e;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: #238636;
+            color: white;
+            border-color: #238636;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .input-section {
+            background: #161b22;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #30363d;
+        }
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            flex: 1;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            color: #8b949e;
+            font-size: 12px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background: #0d1117;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            color: #e6edf3;
+        }
+        input[type="date"]:focus, input[type="time"]:focus {
+            outline: none;
+            border-color: #238636;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 20px;
+            background: #0d1117;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            color: #e6edf3;
+            text-align: center;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #238636;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            background: #0d1117;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            color: #e6edf3;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #238636;
+        }
+        .timer-section {
+            background: #0d1117;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+            border: 2px solid #30363d;
+        }
+        .timer-display {
+            font-size: 48px;
+            font-weight: 700;
+            color: #58a6ff;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+        }
+        .timer-status {
+            font-size: 14px;
+            color: #8b949e;
+            margin-bottom: 15px;
+        }
+        .timer-status.running {
+            color: #238636;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            flex: 1;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 120px;
+        }
+        .btn-start {
+            background: #238636;
+            color: white;
+        }
+        .btn-start:active {
+            background: #2ea043;
+            transform: scale(0.98);
+        }
+        .btn-stop {
+            background: #da3633;
+            color: white;
+        }
+        .btn-stop:active {
+            background: #f85149;
+            transform: scale(0.98);
+        }
+        .btn-add {
+            background: #238636;
+            color: white;
+        }
+        .btn-add:active {
+            background: #2ea043;
+            transform: scale(0.98);
+        }
+        .btn-export {
+            background: #1f6feb;
+            color: white;
+        }
+        .btn-export:active {
+            background: #388bfd;
+            transform: scale(0.98);
+        }
+        .btn-clear {
+            background: #da3633;
+            color: white;
+        }
+        .btn-clear:active {
+            background: #f85149;
+            transform: scale(0.98);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .entries {
+            background: #161b22;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #30363d;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .date-group {
+            margin-bottom: 25px;
+        }
+        .date-header {
+            color: #8b949e;
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-bottom: 1px solid #30363d;
+            background: #0d1117;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        .date-header:hover {
+            background: #161b22;
+        }
+        .date-header-content {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex: 1;
+        }
+        .date-header-arrow {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+        .date-header-arrow.collapsed {
+            transform: rotate(-90deg);
+        }
+        .date-entries {
+            display: none;
+            margin-top: 10px;
+        }
+        .date-entries.expanded {
+            display: block;
+        }
+        .date-summary {
+            font-size: 12px;
+            color: #58a6ff;
+        }
+        .history-selector {
+            background: #161b22;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #30363d;
+        }
+        .history-selector label {
+            display: block;
+            color: #8b949e;
+            font-size: 12px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .history-selector select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background: #0d1117;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            color: #e6edf3;
+            cursor: pointer;
+        }
+        .history-selector select:focus {
+            outline: none;
+            border-color: #238636;
+        }
+        .entry {
+            background: #0d1117;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid #238636;
+        }
+        .entry-content {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex: 1;
+        }
+        .entry-number {
+            background: #238636;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 18px;
+            min-width: 50px;
+            text-align: center;
+        }
+        .entry-time {
+            color: #58a6ff;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .entry-note {
+            color: #8b949e;
+            font-size: 14px;
+            flex: 1;
+        }
+        .entry-actions {
+            display: flex;
+            gap: 5px;
+        }
+        .entry-delete, .entry-edit {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .entry-delete {
+            color: #f85149;
+        }
+        .entry-delete:hover {
+            background: #f85149;
+            color: white;
+        }
+        .entry-edit {
+            color: #58a6ff;
+        }
+        .entry-edit:hover {
+            background: #58a6ff;
+            color: white;
+        }
+        .entry.editing {
+            border-left-color: #58a6ff;
+            background: #1a1f29;
+        }
+        .entry-edit-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+        }
+        .entry-edit-input {
+            padding: 8px 12px;
+            background: #0d1117;
+            border: 2px solid #58a6ff;
+            border-radius: 4px;
+            color: #e6edf3;
+            font-size: 16px;
+            width: 100px;
+        }
+        .entry-edit-note {
+            flex: 1;
+            padding: 8px 12px;
+            background: #0d1117;
+            border: 2px solid #58a6ff;
+            border-radius: 4px;
+            color: #e6edf3;
+            font-size: 14px;
+        }
+        .btn-save-edit {
+            background: #238636;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .btn-cancel-edit {
+            background: #6e7681;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .total-section {
+            background: #1f6feb;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .total-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        .total-value {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8b949e;
+        }
+        .analysis-section {
+            background: #161b22;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #30363d;
+            margin-bottom: 20px;
+        }
+        .analysis-card {
+            background: #0d1117;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #1f6feb;
+        }
+        .analysis-title {
+            color: #58a6ff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .freq-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #30363d;
+        }
+        .freq-item:last-child {
+            border-bottom: none;
+        }
+        .freq-number {
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        .freq-count {
+            color: #8b949e;
+        }
+        .freq-bar {
+            background: #30363d;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .freq-bar-fill {
+            background: #238636;
+            height: 100%;
+            transition: width 0.3s;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            .form-row { flex-direction: column; }
+            .entry-content { flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⏱️ Quick Time Logger</h1>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('logger')">📝 Logger</div>
+            <div class="tab" onclick="switchTab('analysis')">📊 Analysis</div>
+        </div>
+
+        <div id="loggerTab" class="tab-content active">
+            <div class="input-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Work Date</label>
+                        <input type="date" id="workDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <input type="time" id="startTime">
+                    </div>
+                </div>
+
+                <div class="timer-section">
+                    <div class="timer-display" id="timerDisplay">00:00:00</div>
+                    <div class="timer-status" id="timerStatus">Timer stopped</div>
+                    <div class="btn-group">
+                        <button class="btn-start" id="startBtn" onclick="startTimer()">▶ Start Timer</button>
+                        <button class="btn-stop" id="stopBtn" onclick="stopTimer()" disabled>⏹ Stop Timer</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Number</label>
+                    <input type="number" id="numberInput" placeholder="Enter number">
+                </div>
+
+                <div class="form-group">
+                    <label>Note (Optional)</label>
+                    <input type="text" id="noteInput" placeholder="Add note">
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn-add" onclick="addEntry()">➕ Add Entry</button>
+                    <button class="btn-export" onclick="exportData()">📥 Export</button>
+                    <button class="btn-clear" onclick="clearAll()">🗑️ Clear</button>
+                </div>
+            </div>
+
+            <div class="history-selector">
+                <label>View History</label>
+                <select id="historySelect" onchange="filterByDate()">
+                    <option value="all">All Days</option>
+                </select>
+            </div>
+
+            <div class="entries" id="entriesContainer">
+                <div class="empty-state">No entries yet. Start the timer and enter numbers!</div>
+            </div>
+
+            <div class="total-section">
+                <div class="total-label">Total Sum</div>
+                <div class="total-value" id="totalSum">0</div>
+            </div>
+        </div>
+
+        <div id="analysisTab" class="tab-content">
+            <div class="analysis-section">
+                <div class="analysis-card">
+                    <div class="analysis-title">📊 Session Analysis (Start to Stop Time)</div>
+                    <div id="frequencyByTime"></div>
+                </div>
+                
+                <div class="analysis-card">
+                    <div class="analysis-title">🔢 Number Frequency Per Session</div>
+                    <div id="frequencyByNumber"></div>
+                </div>
+
+                <div class="analysis-card">
+                    <div class="analysis-title">📈 Statistics</div>
+                    <div id="statistics"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let entries = [];
+        let sessions = [];
+        let currentSession = null;
+        let timerInterval = null;
+        let timerStartTime = null;
+        let currentTab = 'logger';
+        let editingEntryId = null;
+        let selectedDateFilter = 'all';
+
+        function updateDate() {
+            document.getElementById('workDate').valueAsDate = new Date();
+        }
+        updateDate();
+        setInterval(() => {
+            const now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0) {
+                updateDate();
+            }
+        }, 60000);
+
+        async function loadData() {
+            try {
+                const result = await window.storage.get('timeLoggerEntries');
+                if (result && result.value) {
+                    entries = JSON.parse(result.value);
+                    renderEntries();
+                }
+                const sessionResult = await window.storage.get('timeLoggerSessions');
+                if (sessionResult && sessionResult.value) {
+                    sessions = JSON.parse(sessionResult.value);
+                }
+            } catch (e) {
+                console.log('No saved data or error loading:', e);
+            }
+        }
+
+        async function saveData() {
+            try {
+                await window.storage.set('timeLoggerEntries', JSON.stringify(entries));
+                await window.storage.set('timeLoggerSessions', JSON.stringify(sessions));
+            } catch (e) {
+                console.error('Error saving data:', e);
+            }
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            if (tab === 'logger') {
+                document.querySelector('.tab:nth-child(1)').classList.add('active');
+                document.getElementById('loggerTab').classList.add('active');
+            } else {
+                document.querySelector('.tab:nth-child(2)').classList.add('active');
+                document.getElementById('analysisTab').classList.add('active');
+                renderAnalysis();
+            }
+        }
+
+        function startTimer() {
+            const workDate = document.getElementById('workDate').value;
+            const startTime = document.getElementById('startTime').value;
+            
+            if (!workDate) {
+                alert('Please select a work date first');
+                return;
+            }
+            
+            if (!startTime) {
+                alert('Please select a start time first');
+                return;
+            }
+
+            timerStartTime = Date.now();
+            
+            currentSession = {
+                id: Date.now(),
+                workDate: workDate,
+                startTime: startTime,
+                startTimestamp: timerStartTime,
+                entries: []
+            };
+            
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('stopBtn').disabled = false;
+            document.getElementById('timerStatus').textContent = 'Timer running...';
+            document.getElementById('timerStatus').classList.add('running');
+            document.getElementById('workDate').disabled = true;
+            document.getElementById('startTime').disabled = true;
+
+            timerInterval = setInterval(() => {
+                const elapsed = Date.now() - timerStartTime;
+                const hours = Math.floor(elapsed / 3600000);
+                const minutes = Math.floor((elapsed % 3600000) / 60000);
+                const seconds = Math.floor((elapsed % 60000) / 1000);
+                
+                document.getElementById('timerDisplay').textContent = 
+                    `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            if (currentSession) {
+                const now = new Date();
+                const stopTime = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                
+                currentSession.stopTime = stopTime;
+                currentSession.stopTimestamp = Date.now();
+                currentSession.duration = currentSession.stopTimestamp - currentSession.startTimestamp;
+                
+                sessions.push(currentSession);
+                saveData();
+                currentSession = null;
+            }
+            
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+            document.getElementById('timerStatus').textContent = 'Timer stopped';
+            document.getElementById('timerStatus').classList.remove('running');
+            document.getElementById('timerDisplay').textContent = '00:00:00';
+            document.getElementById('workDate').disabled = false;
+            document.getElementById('startTime').disabled = false;
+        }
+
+        function addEntry() {
+            const workDate = document.getElementById('workDate').value;
+            const startTime = document.getElementById('startTime').value;
+            const numberInput = document.getElementById('numberInput');
+            const noteInput = document.getElementById('noteInput');
+            const number = parseFloat(numberInput.value);
+
+            if (!currentSession) {
+                alert('Please start the timer first');
+                return;
+            }
+
+            if (isNaN(number) || numberInput.value.trim() === '') {
+                alert('Please enter a valid number');
+                return;
+            }
+
+            const now = new Date();
+            const currentTime = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+            
+            const entry = {
+                id: Date.now(),
+                number: number,
+                note: noteInput.value.trim(),
+                workDate: workDate,
+                startTime: startTime,
+                recordedTime: currentTime,
+                timestamp: now.getTime(),
+                sessionId: currentSession.id
+            };
+            
+            entries.push(entry);
+            currentSession.entries.push(entry);
+
+            saveData();
+            renderEntries();
+
+            numberInput.value = '';
+            noteInput.value = '';
+            numberInput.focus();
+        }
+
+        function deleteEntry(id) {
+            if (confirm('Delete this entry?')) {
+                entries = entries.filter(e => e.id !== id);
+                
+                sessions.forEach(session => {
+                    session.entries = session.entries.filter(e => e.id !== id);
+                });
+                
+                saveData();
+                renderEntries();
+            }
+        }
+        
+        function startEditEntry(id) {
+            editingEntryId = id;
+            renderEntries();
+        }
+        
+        function cancelEdit() {
+            editingEntryId = null;
+            renderEntries();
+        }
+        
+        function saveEdit(id) {
+            const numberInput = document.getElementById(`edit-number-${id}`);
+            const noteInput = document.getElementById(`edit-note-${id}`);
+            const newNumber = parseFloat(numberInput.value);
+            
+            if (isNaN(newNumber) || numberInput.value.trim() === '') {
+                alert('Please enter a valid number');
+                return;
+            }
+            
+            const entry = entries.find(e => e.id === id);
+            if (entry) {
+                entry.number = newNumber;
+                entry.note = noteInput.value.trim();
+            }
+            
+            sessions.forEach(session => {
+                const sessionEntry = session.entries.find(e => e.id === id);
+                if (sessionEntry) {
+                    sessionEntry.number = newNumber;
+                    sessionEntry.note = noteInput.value.trim();
+                }
+            });
+            
+            editingEntryId = null;
+            saveData();
+            renderEntries();
+        }
+
+        function toggleDateGroup(key) {
+            const entriesDiv = document.getElementById(`entries-${key}`);
+            const arrow = document.getElementById(`arrow-${key}`);
+            
+            if (entriesDiv.classList.contains('expanded')) {
+                entriesDiv.classList.remove('expanded');
+                arrow.classList.add('collapsed');
+            } else {
+                entriesDiv.classList.add('expanded');
+                arrow.classList.remove('collapsed');
+            }
+        }
+
+        function filterByDate() {
+            selectedDateFilter = document.getElementById('historySelect').value;
+            renderEntries();
+        }
+
+        function populateHistoryDropdown() {
+            const select = document.getElementById('historySelect');
+            if (!select) return;
+            
+            const uniqueDates = {};
+            
+            entries.forEach(entry => {
+                const key = `${entry.workDate}_${entry.startTime}`;
+                if (!uniqueDates[key]) {
+                    uniqueDates[key] = {
+                        date: entry.workDate,
+                        startTime: entry.startTime,
+                        timestamp: entry.timestamp
+                    };
+                }
+            });
+
+            const sortedDates = Object.keys(uniqueDates).sort((a, b) => {
+                return uniqueDates[b].timestamp - uniqueDates[a].timestamp;
+            });
+
+            let options = '<option value="all">All Days</option>';
+            sortedDates.forEach(key => {
+                const dateInfo = uniqueDates[key];
+                const formattedDate = new Date(dateInfo.date).toLocaleDateString('en-US', { 
+                    month: 'short', day: 'numeric', year: 'numeric' 
+                });
+                options += `<option value="${key}">${formattedDate} - Start: ${dateInfo.startTime}</option>`;
+            });
+
+            select.innerHTML = options;
+            if (selectedDateFilter && uniqueDates[selectedDateFilter]) {
+                select.value = selectedDateFilter;
+            } else {
+                select.value = 'all';
+                selectedDateFilter = 'all';
+            }
+        }
+
+        function renderEntries() {
+            const container = document.getElementById('entriesContainer');
+            const totalSum = document.getElementById('totalSum');
+
+            if (entries.length === 0) {
+                container.innerHTML = '<div class="empty-state">No entries yet. Start the timer and enter numbers!</div>';
+                totalSum.textContent = '0';
+                document.getElementById('historySelect').innerHTML = '<option value="all">All Days</option>';
+                return;
+            }
+
+            populateHistoryDropdown();
+
+            const grouped = {};
+            entries.forEach(entry => {
+                const key = `${entry.workDate}_${entry.startTime}`;
+                if (!grouped[key]) {
+                    grouped[key] = [];
+                }
+                grouped[key].push(entry);
+            });
+
+            // Filter based on selection
+            let displayKeys;
+            if (selectedDateFilter === 'all') {
+                displayKeys = Object.keys(grouped);
+            } else {
+                displayKeys = [selectedDateFilter];
+            }
+
+            Object.keys(grouped).forEach(key => {
+                grouped[key].sort((a, b) => b.timestamp - a.timestamp);
+            });
+
+            const sortedKeys = displayKeys.sort((a, b) => {
+                const dateA = new Date(grouped[a][0].timestamp);
+                const dateB = new Date(grouped[b][0].timestamp);
+                return dateB - dateA;
+            });
+
+            let html = '';
+            sortedKeys.forEach((key, index) => {
+                const [date, time] = key.split('_');
+                const formattedDate = new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                
+                const sessionEntries = grouped[key];
+                const sessionTotal = sessionEntries.reduce((sum, e) => sum + e.number, 0);
+                const entryCount = sessionEntries.length;
+                
+                // Always expand when filtering to specific date, or expand first when showing all
+                const isExpanded = (selectedDateFilter !== 'all' || index === 0) ? 'expanded' : '';
+                const arrowClass = (selectedDateFilter !== 'all' || index === 0) ? '' : 'collapsed';
+                
+                html += `<div class="date-group">
+                    <div class="date-header" onclick="toggleDateGroup('${key}')">
+                        <div class="date-header-content">
+                            <span class="date-header-arrow ${arrowClass}" id="arrow-${key}">▼</span>
+                            <span>${formattedDate} - Start: ${time}</span>
+                            <span class="date-summary">${entryCount} entries • Total: ${sessionTotal.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div class="date-entries ${isExpanded}" id="entries-${key}">`;
+                
+                grouped[key].forEach(entry => {
+                    if (editingEntryId === entry.id) {
+                        html += `<div class="entry editing">
+                            <div class="entry-edit-form">
+                                <input type="number" id="edit-number-${entry.id}" class="entry-edit-input" value="${entry.number}" step="any">
+                                <input type="text" id="edit-note-${entry.id}" class="entry-edit-note" value="${entry.note}" placeholder="Note">
+                                <button class="btn-save-edit" onclick="saveEdit(${entry.id})">💾 Save</button>
+                                <button class="btn-cancel-edit" onclick="cancelEdit()">✕ Cancel</button>
+                            </div>
+                        </div>`;
+                    } else {
+                        html += `<div class="entry">
+                            <div class="entry-content">
+                                <div class="entry-number">${entry.number}</div>
+                                <div class="entry-time">${entry.recordedTime}</div>
+                                ${entry.note ? `<div class="entry-note">${entry.note}</div>` : ''}
+                            </div>
+                            <div class="entry-actions">
+                                <button class="entry-edit" onclick="startEditEntry(${entry.id})" title="Edit">✏️</button>
+                                <button class="entry-delete" onclick="deleteEntry(${entry.id})" title="Delete">🗑️</button>
+                            </div>
+                        </div>`;
+                    }
+                });
+
+                html += '</div></div>';
+            });
+
+            container.innerHTML = html;
+
+            // Calculate total based on filtered entries
+            let filteredEntries = entries;
+            if (selectedDateFilter !== 'all') {
+                filteredEntries = entries.filter(e => `${e.workDate}_${e.startTime}` === selectedDateFilter);
+            }
+            const total = filteredEntries.reduce((sum, entry) => sum + entry.number, 0);
+            totalSum.textContent = total.toFixed(2);
+        }
+
+        function renderAnalysis() {
+            let sessionHtml = '';
+            if (sessions.length === 0) {
+                sessionHtml = '<div class="empty-state">No completed sessions yet. Start and stop the timer to create sessions.</div>';
+            } else {
+                const sortedSessions = [...sessions].sort((a, b) => b.startTimestamp - a.startTimestamp);
+                
+                sortedSessions.forEach(session => {
+                    const numbers = session.entries.map(e => e.number);
+                    const sum = numbers.reduce((a, b) => a + b, 0);
+                    const duration = formatDuration(session.duration);
+                    
+                    const freq = {};
+                    numbers.forEach(num => {
+                        freq[num] = (freq[num] || 0) + 1;
+                    });
+                    
+                    const sortedFreq = Object.entries(freq)
+                        .sort((a, b) => b[1] - a[1])
+                        .map(([num, count]) => `${num} - ${count} time${count > 1 ? 's' : ''}`)
+                        .join(' • ');
+                    
+                    const formattedDate = new Date(session.workDate).toLocaleDateString('en-US', { 
+                        month: 'short', day: 'numeric', year: 'numeric' 
+                    });
+                    
+                    sessionHtml += `
+                        <div class="freq-item" style="margin-bottom: 20px;">
+                            <div>
+                                <div class="freq-number" style="font-size: 16px; margin-bottom: 8px;">
+                                    ${formattedDate} • Start: ${session.startTime} - Stop: ${session.stopTime || 'Ongoing'}
+                                </div>
+                                <div class="freq-count" style="margin-bottom: 8px;">
+                                    Duration: ${duration} • 
+                                    Total: ${numbers.length} entries • 
+                                    Sum: ${sum.toFixed(2)}
+                                </div>
+                                <div class="freq-count" style="color: #58a6ff; font-weight: 600; margin-top: 8px; padding: 8px; background: #0d1117; border-radius: 4px;">
+                                    ${sortedFreq || 'No entries'}
+                                </div>
+                            </div>
+                        </div>`;
+                });
+            }
+            document.getElementById('frequencyByTime').innerHTML = sessionHtml;
+
+            let numHtml = '';
+            if (sessions.length === 0) {
+                numHtml = '<div class="empty-state">No data available</div>';
+            } else {
+                const sortedSessions = [...sessions].sort((a, b) => b.startTimestamp - a.startTimestamp);
+                
+                sortedSessions.forEach(session => {
+                    const formattedDate = new Date(session.workDate).toLocaleDateString('en-US', { 
+                        month: 'short', day: 'numeric', year: 'numeric' 
+                    });
+                    
+                    const freq = {};
+                    session.entries.forEach(entry => {
+                        freq[entry.number] = (freq[entry.number] || 0) + 1;
+                    });
+                    
+                    const sortedFreq = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+                    
+                    if (sortedFreq.length > 0) {
+                        numHtml += `<div style="margin-bottom: 20px; padding: 15px; background: #0d1117; border-radius: 8px; border-left: 3px solid #1f6feb;">
+                            <div class="freq-number" style="margin-bottom: 10px;">${formattedDate} • ${session.startTime} - ${session.stopTime}</div>`;
+                        
+                        const maxCount = sortedFreq[0][1];
+                        sortedFreq.forEach(([num, count]) => {
+                            const percentage = (count / maxCount) * 100;
+                            numHtml += `
+                                <div class="freq-item">
+                                    <div class="freq-number">Number: ${num}</div>
+                                    <div class="freq-count">${count} times</div>
+                                </div>
+                                <div class="freq-bar">
+                                    <div class="freq-bar-fill" style="width: ${percentage}%"></div>
+                                </div>`;
+                        });
+                        
+                        numHtml += `</div>`;
+                    }
+                });
+            }
+            document.getElementById('frequencyByNumber').innerHTML = numHtml;
+
+            let statsHtml = '';
+            if (entries.length === 0) {
+                statsHtml = '<div class="empty-state">No data available</div>';
+            } else {
+                const numbers = entries.map(e => e.number);
+                const sum = numbers.reduce((a, b) => a + b, 0);
+                const avg = (sum / numbers.length).toFixed(2);
+                const min = Math.min(...numbers);
+                const max = Math.max(...numbers);
+                const totalDuration = sessions.reduce((sum, s) => sum + (s.duration || 0), 0);
+                
+                statsHtml = `
+                    <div class="freq-item">
+                        <span>Total Sessions:</span>
+                        <span class="freq-number">${sessions.length}</span>
+                    </div>
+                    <div class="freq-item">
+                        <span>Total Working Time:</span>
+                        <span class="freq-number">${formatDuration(totalDuration)}</span>
+                    </div>
+                    <div class="freq-item">
+                        <span>Total Entries:</span>
+                        <span class="freq-number">${entries.length}</span>
+                    </div>
+                    <div class="freq-item">
+                        <span>Total Sum:</span>
+                        <span class="freq-number">${sum.toFixed(2)}</span>
+                    </div>
+                    <div class="freq-item">
+                        <span>Average:</span>
+                        <span class="freq-number">${avg}</span>
+                    </div>
+                    <div class="freq-item">
+                        <span>Min:</span>
+                        <span class="freq-number">${min}</span>
+                    </div>
+                    <div class="freq-item">
+                        <span>Max:</span>
+                        <span class="freq-number">${max}</span>
+                    </div>
+                `;
+            }
+            document.getElementById('statistics').innerHTML = statsHtml;
+        }
+        
+        function formatDuration(ms) {
+            const hours = Math.floor(ms / 3600000);
+            const minutes = Math.floor((ms % 3600000) / 60000);
+            const seconds = Math.floor((ms % 60000) / 1000);
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes}m`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${seconds}s`;
+            } else {
+                return `${seconds}s`;
+            }
+        }
+
+        function exportData() {
+            if (entries.length === 0) {
+                alert('No data to export');
+                return;
+            }
+
+            let text = 'TIME LOGGER EXPORT\n';
+            text += '==================\n\n';
+
+            const grouped = {};
+            entries.forEach(entry => {
+                const key = `${entry.workDate}_${entry.startTime}`;
+                if (!grouped[key]) grouped[key] = [];
+                grouped[key].push(entry);
+            });
+
+            Object.keys(grouped).sort().forEach(key => {
+                const [date, time] = key.split('_');
+                text += `Date: ${date} | Start Time: ${time}\n`;
+                text += '-'.repeat(50) + '\n';
+                
+                grouped[key].sort((a,b) => a.timestamp - b.timestamp).forEach(entry => {
+                    text += `${entry.recordedTime} - ${entry.number}`;
+                    if (entry.note) text += ` - ${entry.note}`;
+                    text += '\n';
+                });
+                
+                const total = grouped[key].reduce((sum, e) => sum + e.number, 0);
+                text += `Session Total: ${total.toFixed(2)}\n\n`;
+            });
+
+            const grandTotal = entries.reduce((sum, e) => sum + e.number, 0);
+            text += `GRAND TOTAL: ${grandTotal.toFixed(2)}\n`;
+
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `time_log_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        async function clearAll() {
+            if (entries.length === 0 && sessions.length === 0) {
+                alert('No data to clear');
+                return;
+            }
+
+            if (confirm('Clear all entries and sessions? This cannot be undone.')) {
+                entries = [];
+                sessions = [];
+                await saveData();
+                renderEntries();
+            }
+        }
+
+        document.getElementById('numberInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addEntry();
+        });
+
+        document.getElementById('noteInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addEntry();
+        });
+
+        loadData();
+    </script>
+</body>
+</html>
