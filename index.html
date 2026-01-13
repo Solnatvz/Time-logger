@@ -27,15 +27,9 @@
         .form-group { flex: 1; margin-bottom: 15px; }
         label { display: block; color: #8b949e; font-size: 12px; margin-bottom: 5px; font-weight: 600; }
         input[type="date"], input[type="time"] { width: 100%; padding: 12px; font-size: 16px; background: #0d1117; border: 2px solid #30363d; border-radius: 8px; color: #e6edf3; }
-        input[type="date"]:focus, input[type="time"]:focus { outline: none; border-color: #238636; }
-        input[type="number"] { width: 100%; padding: 15px; font-size: 20px; background: #0d1117; border: 2px solid #30363d; border-radius: 8px; color: #e6edf3; text-align: center; }
-        input[type="number"]:focus { outline: none; border-color: #238636; }
-        input[type="text"] { width: 100%; padding: 15px; font-size: 16px; background: #0d1117; border: 2px solid #30363d; border-radius: 8px; color: #e6edf3; }
-        input[type="text"]:focus { outline: none; border-color: #238636; }
+        input[type="number"], input[type="text"] { width: 100%; padding: 15px; background: #0d1117; border: 2px solid #30363d; border-radius: 8px; color: #e6edf3; }
         .timer-section { background: #0d1117; padding: 20px; border-radius: 12px; margin-bottom: 15px; text-align: center; border: 2px solid #30363d; }
         .timer-display { font-size: 48px; font-weight: 700; color: #58a6ff; margin-bottom: 15px; font-family: 'Courier New', monospace; }
-        .timer-status { font-size: 14px; color: #8b949e; margin-bottom: 15px; }
-        .timer-status.running { color: #238636; }
         .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
         button { flex: 1; padding: 15px; font-size: 16px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; min-width: 120px; }
         .btn-start { background: #238636; color: white; }
@@ -45,47 +39,10 @@
         .btn-clear { background: #da3633; color: white; }
         button:disabled { opacity: 0.5; cursor: not-allowed; }
         .entries { background: #161b22; border-radius: 12px; padding: 20px; border: 1px solid #30363d; max-height: 500px; overflow-y: auto; }
-        .date-group { margin-bottom: 25px; }
-        .date-header { color: #8b949e; font-size: 14px; margin-bottom: 10px; padding: 12px 15px; border-bottom: 1px solid #30363d; background: #0d1117; border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
-        .date-header:hover { background: #161b22; }
-        .date-header-content { display: flex; gap: 15px; align-items: center; flex: 1; }
-        .date-header-arrow { font-size: 18px; transition: transform 0.3s; }
-        .date-header-arrow.collapsed { transform: rotate(-90deg); }
-        .date-entries { display: none; margin-top: 10px; }
-        .date-entries.expanded { display: block; }
-        .date-summary { font-size: 12px; color: #58a6ff; }
-        .history-selector { background: #161b22; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #30363d; }
-        .history-selector select { width: 100%; padding: 12px; font-size: 16px; background: #0d1117; border: 2px solid #30363d; border-radius: 8px; color: #e6edf3; cursor: pointer; }
         .entry { background: #0d1117; padding: 12px 15px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 3px solid #238636; }
-        .entry-content { display: flex; gap: 15px; align-items: center; flex: 1; }
-        .entry-number { background: #238636; color: white; padding: 8px 15px; border-radius: 6px; font-weight: 700; font-size: 18px; min-width: 50px; text-align: center; }
-        .entry-time { color: #58a6ff; font-weight: 600; font-size: 14px; }
-        .entry-note { color: #8b949e; font-size: 14px; flex: 1; }
-        .entry-actions { display: flex; gap: 5px; }
-        .entry-delete, .entry-edit { background: transparent; border: none; cursor: pointer; font-size: 16px; padding: 5px 8px; border-radius: 4px; transition: all 0.2s; }
-        .entry-delete { color: #f85149; }
-        .entry-delete:hover { background: #f85149; color: white; }
-        .entry-edit { color: #58a6ff; }
-        .entry-edit:hover { background: #58a6ff; color: white; }
-        .entry.editing { border-left-color: #58a6ff; background: #1a1f29; }
-        .entry-edit-form { display: flex; gap: 10px; align-items: center; flex: 1; }
-        .entry-edit-input { padding: 8px 12px; background: #0d1117; border: 2px solid #58a6ff; border-radius: 4px; color: #e6edf3; font-size: 16px; width: 100px; }
-        .entry-edit-note { flex: 1; padding: 8px 12px; background: #0d1117; border: 2px solid #58a6ff; border-radius: 4px; color: #e6edf3; font-size: 14px; }
-        .btn-save-edit { background: #238636; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 14px; }
-        .btn-cancel-edit { background: #6e7681; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 14px; }
         .total-section { background: #1f6feb; padding: 15px 20px; border-radius: 8px; margin-top: 20px; text-align: center; }
-        .total-label { font-size: 14px; opacity: 0.9; margin-bottom: 5px; }
         .total-value { font-size: 32px; font-weight: 700; }
         .empty-state { text-align: center; padding: 40px 20px; color: #8b949e; }
-        .analysis-section { background: #161b22; border-radius: 12px; padding: 20px; border: 1px solid #30363d; margin-bottom: 20px; }
-        .analysis-card { background: #0d1117; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #1f6feb; }
-        .analysis-title { color: #58a6ff; font-weight: 600; margin-bottom: 10px; font-size: 16px; }
-        .freq-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #30363d; }
-        .freq-item:last-child { border-bottom: none; }
-        .freq-number { color: #e6edf3; font-weight: 600; }
-        .freq-count { color: #8b949e; }
-        .freq-bar { background: #30363d; height: 8px; border-radius: 4px; margin-top: 5px; overflow: hidden; }
-        .freq-bar-fill { background: #238636; height: 100%; transition: width 0.3s; }
     </style>
 </head>
 <body>
@@ -113,7 +70,7 @@
                     </div>
                     <div class="timer-section">
                         <div class="timer-display" id="timerDisplay">00:00:00</div>
-                        <div class="timer-status" id="timerStatus">Timer stopped</div>
+                        <div id="timerStatus" style="font-size: 14px; color: #8b949e; margin-bottom: 15px;">Timer stopped</div>
                         <div class="btn-group">
                             <button class="btn-start" id="startBtn" onclick="startTimer()">▶ Start Timer</button>
                             <button class="btn-stop" id="stopBtn" onclick="stopTimer()" disabled>⏹ Stop Timer</button>
@@ -133,14 +90,8 @@
                         <button class="btn-clear" onclick="clearAll()">🗑️ Clear</button>
                     </div>
                 </div>
-                <div class="history-selector">
-                    <label>View History</label>
-                    <select id="historySelect" onchange="filterByDate()">
-                        <option value="all">All Days</option>
-                    </select>
-                </div>
                 <div class="entries" id="entriesContainer">
-                    <div class="empty-state">No entries yet. Start the timer and enter numbers!</div>
+                    <div class="empty-state">No entries yet!</div>
                 </div>
                 <div class="total-section">
                     <div class="total-label">Total Sum</div>
@@ -148,19 +99,8 @@
                 </div>
             </div>
             <div id="analysisTab" class="tab-content">
-                <div class="analysis-section">
-                    <div class="analysis-card">
-                        <div class="analysis-title">📊 Session Analysis</div>
-                        <div id="frequencyByTime"></div>
-                    </div>
-                    <div class="analysis-card">
-                        <div class="analysis-title">🔢 Number Frequency</div>
-                        <div id="frequencyByNumber"></div>
-                    </div>
-                    <div class="analysis-card">
-                        <div class="analysis-title">📈 Statistics</div>
-                        <div id="statistics"></div>
-                    </div>
+                <div id="statistics" style="padding: 20px; background: #161b22; border-radius: 12px; border: 1px solid #30363d;">
+                    Analysis feature is coming soon!
                 </div>
             </div>
         </div>
@@ -171,7 +111,6 @@
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyA1yRUKWzglv8SDSrLuOyybq8JpnUv2NaQ",
             authDomain: "timelogger-98cc5.firebaseapp.com",
@@ -188,648 +127,98 @@
 
         let currentUser = null;
         let entries = [];
-        let sessions = [];
-        let currentSession = null;
         let timerInterval = null;
-        let timerStartTime = null;
-        let currentTab = 'logger';
-        let editingEntryId = null;
-        let selectedDateFilter = 'all';
 
-        // Load data from Firestore
-        async function loadData() {
-            if (!currentUser) return;
-            
-            try {
-                const entriesDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'entries'));
-                if (entriesDoc.exists()) {
-                    entries = entriesDoc.data().list || [];
-                }
-
-                const sessionsDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'sessions'));
-                if (sessionsDoc.exists()) {
-                    sessions = sessionsDoc.data().list || [];
-                }
-
-                renderEntries();
-            } catch (error) {
-                console.error('Error loading data:', error);
-            }
-        }
-
-        // Save data to Firestore
-        async function saveData() {
-            if (!currentUser) return;
-
-            try {
-                await setDoc(doc(db, 'users', currentUser.uid, 'data', 'entries'), {
-                    list: entries,
-                    updatedAt: Date.now()
-                });
-
-                await setDoc(doc(db, 'users', currentUser.uid, 'data', 'sessions'), {
-                    list: sessions,
-                    updatedAt: Date.now()
-                });
-            } catch (error) {
-                console.error('Error saving data:', error);
-                alert('Error saving data. Please try again.');
-            }
-        }
-
-        // Initialize date/time
-        function initDateTime() {
-            document.getElementById('workDate').valueAsDate = new Date();
-        }
-
-        // Format duration
-        function formatDuration(ms) {
-            const hours = Math.floor(ms / 3600000);
-            const minutes = Math.floor((ms % 3600000) / 60000);
-            const seconds = Math.floor((ms % 60000) / 1000);
-            
-            if (hours > 0) return `${hours}h ${minutes}m`;
-            if (minutes > 0) return `${minutes}m ${seconds}s`;
-            return `${seconds}s`;
-        }
-
-        // Render entries
-        function renderEntries() {
-            const container = document.getElementById('entriesContainer');
-            const totalElement = document.getElementById('totalSum');
-
-            if (entries.length === 0) {
-                container.innerHTML = '<div class="empty-state">No entries yet!</div>';
-                totalElement.textContent = '0';
-                document.getElementById('historySelect').innerHTML = '<option value="all">All Days</option>';
-                return;
-            }
-
-            updateHistorySelector();
-
-            const groupedBySession = {};
-            entries.forEach(entry => {
-                const key = `${entry.workDate}_${entry.startTime}`;
-                if (!groupedBySession[key]) {
-                    groupedBySession[key] = [];
-                }
-                groupedBySession[key].push(entry);
-            });
-
-            let displayKeys = selectedDateFilter === 'all' ? Object.keys(groupedBySession) : [selectedDateFilter];
-
-            Object.keys(groupedBySession).forEach(key => {
-                groupedBySession[key].sort((a, b) => b.timestamp - a.timestamp);
-            });
-
-            const sortedKeys = displayKeys.sort((a, b) => {
-                return new Date(groupedBySession[b][0].timestamp) - new Date(groupedBySession[a][0].timestamp);
-            });
-
-            let html = '';
-            sortedKeys.forEach((key, index) => {
-                const [workDate, startTime] = key.split('_');
-                const dateStr = new Date(workDate).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
-
-                const sessionEntries = groupedBySession[key];
-                const sessionTotal = sessionEntries.reduce((sum, e) => sum + e.number, 0);
-                const entryCount = sessionEntries.length;
-
-                const isExpanded = selectedDateFilter !== 'all' || index === 0 ? 'expanded' : '';
-                const arrowClass = selectedDateFilter !== 'all' || index === 0 ? '' : 'collapsed';
-
-                html += `
-                    <div class="date-group">
-                        <div class="date-header" onclick="toggleDateGroup('${key}')">
-                            <div class="date-header-content">
-                                <span class="date-header-arrow ${arrowClass}" id="arrow-${key}">▼</span>
-                                <span>${dateStr} - Start: ${startTime}</span>
-                                <span class="date-summary">${entryCount} entries • Total: ${sessionTotal.toFixed(2)}</span>
-                            </div>
-                        </div>
-                        <div class="date-entries ${isExpanded}" id="entries-${key}">
-                `;
-
-                groupedBySession[key].forEach(entry => {
-                    if (editingEntryId === entry.id) {
-                        html += `
-                            <div class="entry editing">
-                                <div class="entry-edit-form">
-                                    <input type="number" id="edit-number-${entry.id}" class="entry-edit-input" value="${entry.number}" step="any">
-                                    <input type="text" id="edit-note-${entry.id}" class="entry-edit-note" value="${entry.note}" placeholder="Note">
-                                    <button class="btn-save-edit" onclick="saveEdit(${entry.id})">💾 Save</button>
-                                    <button class="btn-cancel-edit" onclick="cancelEdit()">✕ Cancel</button>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        html += `
-                            <div class="entry">
-                                <div class="entry-content">
-                                    <div class="entry-number">${entry.number}</div>
-                                    <div class="entry-time">${entry.recordedTime}</div>
-                                    ${entry.note ? `<div class="entry-note">${entry.note}</div>` : ''}
-                                </div>
-                                <div class="entry-actions">
-                                    <button class="entry-edit" onclick="startEditEntry(${entry.id})">✏️</button>
-                                    <button class="entry-delete" onclick="deleteEntry(${entry.id})">🗑️</button>
-                                </div>
-                            </div>
-                        `;
-                    }
-                });
-
-                html += `
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-
-            let filteredEntries = entries;
-            if (selectedDateFilter !== 'all') {
-                filteredEntries = entries.filter(e => `${e.workDate}_${e.startTime}` === selectedDateFilter);
-            }
-
-            const total = filteredEntries.reduce((sum, e) => sum + e.number, 0);
-            totalElement.textContent = total.toFixed(2);
-        }
-
-        // Update history selector
-        function updateHistorySelector() {
-            const select = document.getElementById('historySelect');
-            if (!select) return;
-
-            const sessionMap = {};
-            entries.forEach(entry => {
-                const key = `${entry.workDate}_${entry.startTime}`;
-                if (!sessionMap[key]) {
-                    sessionMap[key] = {
-                        date: entry.workDate,
-                        startTime: entry.startTime,
-                        timestamp: entry.timestamp
-                    };
-                }
-            });
-
-            const sortedKeys = Object.keys(sessionMap).sort((a, b) => {
-                return sessionMap[b].timestamp - sessionMap[a].timestamp;
-            });
-
-            let html = '<option value="all">All Days</option>';
-            sortedKeys.forEach(key => {
-                const session = sessionMap[key];
-                const dateStr = new Date(session.date).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
-                html += `<option value="${key}">${dateStr} - Start: ${session.startTime}</option>`;
-            });
-
-            select.innerHTML = html;
-
-            if (selectedDateFilter && sessionMap[selectedDateFilter]) {
-                select.value = selectedDateFilter;
-            } else {
-                select.value = 'all';
-                selectedDateFilter = 'all';
-            }
-        }
-
-        // Render analysis
-        function renderAnalysis() {
-            let sessionHtml = '';
-            if (sessions.length === 0) {
-                sessionHtml = '<div class="empty-state">No sessions yet</div>';
-            } else {
-                const sortedSessions = [...sessions].sort((a, b) => b.startTimestamp - a.startTimestamp);
-                
-                sortedSessions.forEach(session => {
-                    const numbers = session.entries.map(e => e.number);
-                    const total = numbers.reduce((sum, n) => sum + n, 0);
-                    const duration = formatDuration(session.duration);
-
-                    const freqMap = {};
-                    numbers.forEach(n => {
-                        freqMap[n] = (freqMap[n] || 0) + 1;
-                    });
-
-                    const freqStr = Object.entries(freqMap)
-                        .sort((a, b) => b[1] - a[1])
-                        .map(([num, count]) => `${num} - ${count} time${count > 1 ? 's' : ''}`)
-                        .join(' • ');
-
-                    const dateStr = new Date(session.workDate).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                    });
-
-                    sessionHtml += `
-                        <div class="freq-item" style="margin-bottom: 20px">
-                            <div>
-                                <div class="freq-number" style="font-size: 16px; margin-bottom: 8px">
-                                    ${dateStr} • ${session.startTime} - ${session.stopTime || 'Ongoing'}
-                                </div>
-                                <div class="freq-count" style="margin-bottom: 8px">
-                                    Duration: ${duration} • Total: ${numbers.length} • Sum: ${total.toFixed(2)}
-                                </div>
-                                <div class="freq-count" style="color: #58a6ff; font-weight: 600; margin-top: 8px; padding: 8px; background: #0d1117; border-radius: 4px">
-                                    ${freqStr || 'No entries'}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-            document.getElementById('frequencyByTime').innerHTML = sessionHtml;
-
-            let numberFreqHtml = '';
-            if (sessions.length === 0) {
-                numberFreqHtml = '<div class="empty-state">No data</div>';
-            } else {
-                const sortedSessions = [...sessions].sort((a, b) => b.startTimestamp - a.startTimestamp);
-                
-                sortedSessions.forEach(session => {
-                    const dateStr = new Date(session.workDate).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                    });
-
-                    const freqMap = {};
-                    session.entries.forEach(e => {
-                        freqMap[e.number] = (freqMap[e.number] || 0) + 1;
-                    });
-
-                    const sortedFreq = Object.entries(freqMap).sort((a, b) => b[1] - a[1]);
-
-                    if (sortedFreq.length > 0) {
-                        numberFreqHtml += `
-                            <div style="margin-bottom: 20px; padding: 15px; background: #0d1117; border-radius: 8px; border-left: 3px solid #1f6feb">
-                                <div class="freq-number" style="margin-bottom: 10px">
-                                    ${dateStr} • ${session.startTime} - ${session.stopTime}
-                                </div>
-                        `;
-
-                        const maxCount = sortedFreq[0][1];
-                        sortedFreq.forEach(([number, count]) => {
-                            const percentage = (count / maxCount) * 100;
-                            numberFreqHtml += `
-                                <div class="freq-item">
-                                    <div class="freq-number">Number: ${number}</div>
-                                    <div class="freq-count">${count} times</div>
-                                </div>
-                                <div class="freq-bar">
-                                    <div class="freq-bar-fill" style="width: ${percentage}%"></div>
-                                </div>
-                            `;
-                        });
-
-                        numberFreqHtml += '</div>';
-                    }
-                });
-            }
-            document.getElementById('frequencyByNumber').innerHTML = numberFreqHtml;
-
-            let statsHtml = '';
-            if (entries.length === 0) {
-                statsHtml = '<div class="empty-state">No data</div>';
-            } else {
-                const numbers = entries.map(e => e.number);
-                const total = numbers.reduce((sum, n) => sum + n, 0);
-                const avg = (total / numbers.length).toFixed(2);
-                const min = Math.min(...numbers);
-                const max = Math.max(...numbers);
-                const totalTime = sessions.reduce((sum, s) => sum + (s.duration || 0), 0);
-
-                statsHtml = `
-                    <div class="freq-item">
-                        <span>Total Sessions:</span>
-                        <span class="freq-number">${sessions.length}</span>
-                    </div>
-                    <div class="freq-item">
-                        <span>Total Time:</span>
-                        <span class="freq-number">${formatDuration(totalTime)}</span>
-                    </div>
-                    <div class="freq-item">
-                        <span>Total Entries:</span>
-                        <span class="freq-number">${entries.length}</span>
-                    </div>
-                    <div class="freq-item">
-                        <span>Total Sum:</span>
-                        <span class="freq-number">${total.toFixed(2)}</span>
-                    </div>
-                    <div class="freq-item">
-                        <span>Average:</span>
-                        <span class="freq-number">${avg}</span>
-                    </div>
-                    <div class="freq-item">
-                        <span>Min:</span>
-                        <span class="freq-number">${min}</span>
-                    </div>
-                    <div class="freq-item">
-                        <span>Max:</span>
-                        <span class="freq-number">${max}</span>
-                    </div>
-                `;
-            }
-            document.getElementById('statistics').innerHTML = statsHtml;
-        }
-
-        // Auth state observer
         onAuthStateChanged(auth, async (user) => {
             const authSection = document.getElementById('authSection');
             const mainApp = document.getElementById('mainApp');
-
             if (user) {
                 currentUser = user;
                 authSection.innerHTML = `
                     <div class="user-info">
                         <div class="user-details">
-                            <img src="${user.photoURL}" alt="${user.displayName}" class="user-avatar">
+                            <img src="${user.photoURL}" class="user-avatar">
                             <span>${user.displayName}</span>
                         </div>
                         <button class="btn-signout" onclick="window.signOutUser()">Sign Out</button>
-                    </div>
-                `;
+                    </div>`;
                 mainApp.style.display = 'block';
                 await loadData();
             } else {
                 currentUser = null;
-                authSection.innerHTML = `
-                    <button class="btn-auth" onclick="window.signInWithGoogle()">🔐 Sign in with Google</button>
-                    <p style="margin-top: 10px; color: #8b949e; font-size: 14px">Sign in to save data to the cloud</p>
-                `;
+                authSection.innerHTML = `<button class="btn-auth" onclick="window.signInWithGoogle()">🔐 Sign in with Google</button>`;
                 mainApp.style.display = 'none';
             }
         });
 
-        // Sign in function
-        window.signInWithGoogle = async () => {
-            try {
-                await signInWithPopup(auth, provider);
-            } catch (error) {
-                console.error('Sign in error:', error);
-                alert('Sign in failed. Please try again.');
+        async function loadData() {
+            if (!currentUser) return;
+            const entriesDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'entries'));
+            if (entriesDoc.exists()) {
+                entries = entriesDoc.data().list || [];
+                renderEntries();
             }
-        };
+        }
 
-        // Sign out function
-        window.signOutUser = async () => {
-            try {
-                await signOut(auth);
-            } catch (error) {
-                console.error('Sign out error:', error);
-            }
-        };
+        async function saveData() {
+            if (!currentUser) return;
+            await setDoc(doc(db, 'users', currentUser.uid, 'data', 'entries'), { list: entries, updatedAt: Date.now() });
+        }
 
-        // Initialize
-        initDateTime();
-
-        // Tab switching
-        window.switchTab = function(tab) {
-            currentTab = tab;
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-
-            if (tab === 'logger') {
-                document.querySelector('.tab:nth-child(1)').classList.add('active');
-                document.getElementById('loggerTab').classList.add('active');
-            } else {
-                document.querySelector('.tab:nth-child(2)').classList.add('active');
-                document.getElementById('analysisTab').classList.add('active');
-                renderAnalysis();
-            }
-        };
-
-        // Start timer
-        window.startTimer = function() {
-            const workDate = document.getElementById('workDate').value;
-            const startTime = document.getElementById('startTime').value;
-
-            if (!workDate) {
-                alert('Please select a work date');
+        function renderEntries() {
+            const container = document.getElementById('entriesContainer');
+            const totalSum = document.getElementById('totalSum');
+            if (entries.length === 0) {
+                container.innerHTML = '<div class="empty-state">No entries yet!</div>';
+                totalSum.textContent = '0';
                 return;
             }
+            container.innerHTML = entries.map(e => `
+                <div class="entry">
+                    <span>${e.number}</span>
+                    <span style="color: #8b949e; font-size: 12px;">${e.note || ''}</span>
+                </div>
+            `).join('');
+            totalSum.textContent = entries.reduce((sum, e) => sum + e.number, 0).toFixed(2);
+        }
 
-            if (!startTime) {
-                alert('Please select a start time');
-                return;
-            }
+        window.signInWithGoogle = async () => { await signInWithPopup(auth, provider); };
+        window.signOutUser = async () => { await signOut(auth); };
+        window.switchTab = (tab) => {
+            document.getElementById('loggerTab').style.display = tab === 'logger' ? 'block' : 'none';
+            document.getElementById('analysisTab').style.display = tab === 'analysis' ? 'block' : 'none';
+        };
 
-            timerStartTime = Date.now();
-            currentSession = {
-                id: Date.now(),
-                workDate: workDate,
-                startTime: startTime,
-                startTimestamp: timerStartTime,
-                entries: []
-            };
-
+        window.startTimer = () => {
             document.getElementById('startBtn').disabled = true;
             document.getElementById('stopBtn').disabled = false;
-            document.getElementById('timerStatus').textContent = 'Timer running...';
-            document.getElementById('timerStatus').classList.add('running');
-            document.getElementById('workDate').disabled = true;
-            document.getElementById('startTime').disabled = true;
-
+            let start = Date.now();
             timerInterval = setInterval(() => {
-                const elapsed = Date.now() - timerStartTime;
-                const hours = Math.floor(elapsed / 3600000);
-                const minutes = Math.floor((elapsed % 3600000) / 60000);
-                const seconds = Math.floor((elapsed % 60000) / 1000);
-
-                document.getElementById('timerDisplay').textContent = 
-                    `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                let diff = Date.now() - start;
+                document.getElementById('timerDisplay').textContent = new Date(diff).toISOString().substr(11, 8);
             }, 1000);
         };
 
-        // Stop timer
-        window.stopTimer = function() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-
-            if (currentSession) {
-                currentSession.stopTime = new Date().toLocaleTimeString('en-US', {
-                    hour: 'numeric',
-                    minute: '2-digit',
-                    hour12: true
-                });
-                currentSession.stopTimestamp = Date.now();
-                currentSession.duration = currentSession.stopTimestamp - currentSession.startTimestamp;
-                sessions.push(currentSession);
-                saveData();
-                currentSession = null;
-            }
-
+        window.stopTimer = () => {
+            clearInterval(timerInterval);
             document.getElementById('startBtn').disabled = false;
             document.getElementById('stopBtn').disabled = true;
-            document.getElementById('timerStatus').textContent = 'Timer stopped';
-            document.getElementById('timerStatus').classList.remove('running');
-            document.getElementById('timerDisplay').textContent = '00:00:00';
-            document.getElementById('workDate').disabled = false;
-            document.getElementById('startTime').disabled = false;
         };
 
-        // Add entry
-        window.addEntry = function() {
-            const workDate = document.getElementById('workDate').value;
-            const startTime = document.getElementById('startTime').value;
-            const numberInput = document.getElementById('numberInput');
-            const noteInput = document.getElementById('noteInput');
-            const number = parseFloat(numberInput.value);
+        window.addEntry = async () => {
+            const num = parseFloat(document.getElementById('numberInput').value);
+            if (isNaN(num)) return;
+            entries.push({ number: num, note: document.getElementById('noteInput').value, timestamp: Date.now() });
+            renderEntries();
+            await saveData();
+        };
 
-            if (!currentSession) {
-                alert('Please start the timer first');
-                return;
+        window.clearAll = async () => {
+            if (confirm('Clear all data?')) {
+                entries = [];
+                renderEntries();
+                await saveData();
             }
-
-            if (isNaN(number) || numberInput.value.trim() === '') {
-                alert('Please enter a valid number');
-                return;
-            }
-
-            const now = new Date();
-            const entry = {
-                id: Date.now(),
-                number: number,
-                note: noteInput.value.trim(),
-                workDate: workDate,
-                startTime: startTime,
-                recordedTime: now.toLocaleTimeString('en-US', {
-                    hour: 'numeric',
-                    minute: '2-digit',
-                    hour12: true
-                }),
-                timestamp: now.getTime(),
-                sessionId: currentSession.id
-            };
-
-            entries.push(entry);
-            currentSession.entries.push(entry);
-            saveData();
-            renderEntries();
-
-            numberInput.value = '';
-            noteInput.value = '';
-            numberInput.focus();
-        };
-
-        // Delete entry
-        window.deleteEntry = function(id) {
-            if (!confirm('Delete this entry?')) return;
-
-            entries = entries.filter(e => e.id !== id);
-            sessions.forEach(session => {
-                session.entries = session.entries.filter(e => e.id !== id);
-            });
-
-            saveData();
-            renderEntries();
-        };
-
-        // Start editing entry
-        window.startEditEntry = function(id) {
-            editingEntryId = id;
-            renderEntries();
-        };
-
-        // Cancel editing
-        window.cancelEdit = function() {
-            editingEntryId = null;
-            renderEntries();
-        };
-
-        // Save edit
-        window.saveEdit = function(id) {
-            const numberInput = document.getElementById(`edit-number-${id}`);
-            const noteInput = document.getElementById(`edit-note-${id}`);
-            const number = parseFloat(numberInput.value);
-
-            if (isNaN(number) || numberInput.value.trim() === '') {
-                alert('Please enter a valid number');
-                return;
-            }
-
-            const entry = entries.find(e => e.id === id);
-            if (entry) {
-                entry.number = number;
-                entry.note = noteInput.value.trim();
-            }
-
-            sessions.forEach(session => {
-                const sessionEntry = session.entries.find(e => e.id === id);
-                if (sessionEntry) {
-                    sessionEntry.number = number;
-                    sessionEntry.note = noteInput.value.trim();
-                }
-            });
-
-            editingEntryId = null;
-            saveData();
-            renderEntries();
-        };
-
-        // Toggle date group
-        window.toggleDateGroup = function(key) {
-            const entriesDiv = document.getElementById(`entries-${key}`);
-            const arrow = document.getElementById(`arrow-${key}`);
-
-            if (entriesDiv.classList.contains('expanded')) {
-                entriesDiv.classList.remove('expanded');
-                arrow.classList.add('collapsed');
-            } else {
-                entriesDiv.classList.add('expanded');
-                arrow.classList.remove('collapsed');
-            }
-        };
-
-        // Filter by date
-        window.filterByDate = function() {
-            selectedDateFilter = document.getElementById('historySelect').value;
-            renderEntries();
-        };
-
-        // Export data
-        window.exportData = function() {
-            if (entries.length === 0) {
-                alert('No data to export');
-                return;
-            }
-
-            const csvContent = [
-                ['Date', 'Start Time', 'Recorded Time', 'Number', 'Note'].join(','),
-                ...entries.map(e => 
-                    [e.workDate, e.startTime, e.recordedTime, e.number, `"${e.note}"`].join(',')
-                )
-            ].join('\n');
-
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `time-logger-export-${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-            URL.revokeObjectURL(url);
-        };
-
-        // Clear all data
-        window.clearAll = function() {
-            if (!confirm('Clear all data? This cannot be undone!')) return;
-
-            entries = [];
-            sessions = [];
-            saveData();
-            renderEntries();
         };
     </script>
 </body>
