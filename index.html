@@ -1,4 +1,4 @@
-g<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -695,27 +695,22 @@ g<!DOCTYPE html>
 
         async function loadData() {
             try {
-                entries = await getAllEntries();
-                sessions = await getAllSessions();
-                renderEntries();
-            } catch (e) {
-                console.log('Error loading data:', e);
-            }
-        }
-
+           const savedEntries = await getFromIndexedDB('entries');
+        const savedSessions = await getFromIndexedDB('sessions');
+        if (savedEntries) entries = savedEntries;
+        if (savedSessions) sessions = savedSessions;
+        renderEntries();
+    } catch (e) {
+        console.log('Error loading data:', e);
+    }
         async function saveData() {
-            try {
-                for (const entry of entries) {
-                    await saveEntry(entry);
-                }
-                
-                for (const session of sessions) {
-                    await saveSession(session);
-                }
-            } catch (e) {
-                console.error('Error saving data:', e);
-            }
-        }
+    try {
+        await saveToIndexedDB('entries', entries);
+        await saveToIndexedDB('sessions', sessions);
+    } catch (e) {
+        console.error('Error saving data:', e);
+    }
+}
 
         function switchTab(tab) {
             currentTab = tab;
@@ -1280,3 +1275,4 @@ g<!DOCTYPE html>
     </script>
 </body>
 </html>
+
