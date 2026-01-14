@@ -695,22 +695,27 @@
 
         async function loadData() {
             try {
-           const savedEntries = await getFromIndexedDB('entries');
-        const savedSessions = await getFromIndexedDB('sessions');
-        if (savedEntries) entries = savedEntries;
-        if (savedSessions) sessions = savedSessions;
-        renderEntries();
-    } catch (e) {
-        console.log('Error loading data:', e);
-    }
+                entries = await getAllEntries();
+                sessions = await getAllSessions();
+                renderEntries();
+            } catch (e) {
+                console.log('Error loading data:', e);
+            }
+        }
+
         async function saveData() {
-    try {
-        await saveToIndexedDB('entries', entries);
-        await saveToIndexedDB('sessions', sessions);
-    } catch (e) {
-        console.error('Error saving data:', e);
-    }
-}
+            try {
+                for (const entry of entries) {
+                    await saveEntry(entry);
+                }
+                
+                for (const session of sessions) {
+                    await saveSession(session);
+                }
+            } catch (e) {
+                console.error('Error saving data:', e);
+            }
+        }
 
         function switchTab(tab) {
             currentTab = tab;
@@ -1275,4 +1280,3 @@
     </script>
 </body>
 </html>
-
